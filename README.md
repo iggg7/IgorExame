@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Exame Responsive Web Development
 
-## Getting Started
+Este projeto é uma aplicação de gerenciamento de usuários construída com Next.js e TypeScript. O objetivo é permitir o registro, edição e visualização de usuários, com funcionalidades para manipulação de dados e uma interface de usuário utilizando Tailwind CSS.
 
-First, run the development server:
+## Estrutura do Projeto
+
+A estrutura principal do projeto é organizada da seguinte forma:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+📁igorexame
+├── 📁public
+│   └── favicon.ico                 # Ícone do site
+├── 📁src
+│   ├── 📁app                       # Páginas da aplicação 
+│   ├── 📁components                
+│   ├── 📁data                      
+│   │   └── users.json              
+│   └── 📁pages/api                 # Endpoints da API para manipulação de usuários
+├── .eslintrc.json                  # Configurações do ESLint
+├── .gitignore                      # Arquivo para ignorar arquivos no Git
+├── .prettierrc                     # Configurações do Prettier para formatação de código
+├── next-env.d.ts                   # Definições de tipos para o Next.js
+├── next.config.mjs                 # Configurações específicas do Next.js
+├── package.json                    # Dependências e scripts do projeto
+├── postcss.config.mjs              # Configurações do PostCSS
+├── tailwind.config.ts              # Configurações do Tailwind CSS
+└── tsconfig.json                   # Configurações do TypeScript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pré-requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Certifique-se de ter o seguinte instalado em sua máquina:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (versão 14 ou superior)
+- npm (ou yarn, conforme preferir)
 
-## Learn More
+## Instalação
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone o repositório:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git clone https://github.com/iggg7/IgorExame.git
+cd igorexame
+```
+   
+2. Instale as dependências:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install
+```
 
-## Deploy on Vercel
+ou, se estiver usando yarn:
+```bash
+yarn install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ou
+
+```bash
+yarn dev
+```
+
+#### Acesse a aplicação em http://localhost:3000.
+
+## Funcionalidades
+
+1. Login de Usuário
+A página de login está localizada em src/app/(home)/page.tsx. O formulário permite que os usuários façam login com um nome de usuário e senha para acessar a tabela de usuários (não possuí validador apenas retorna no console quem fez o login). *(na url: "http://localhost:3000/")*
+
+2. Registro de Usuário
+A página de registro está localizada em src/app/user-registration-page/page.tsx. Nessa página, você pode preencher os detalhes do usuário e enviá-los para o armazenamento no arquivo users.json.*(na url: "(http://localhost:3000/user-registration-page)")*
+
+3. Tabela de Gerenciamento de Usuários
+A página de gerenciamento de usuários está localizada em src/app/user-management-table/page.tsx. Ela exibe uma tabela com os dados dos usuários registrados e oferece ações de edição e exclusão. *(na url: "http://localhost:3000/user-management-table")*
+
+4. Edição de Usuário
+A página de edição de usuários é uma rota dinâmica localizada em src/app/user-management/[id]/page.tsx. Acessível a partir da tabela de usuários, permite editar as informações do usuário selecionado. *(na url: "http://localhost:3000/user-management/[id]")*
+
+## API Endpoints
+Os endpoints da API estão na pasta src/pages/api/ nesses end-poits foi aplicado o RouterHandler. Eles incluem:
+
+**GET /api/getUsers: Retorna a lista completa de usuários.**
+
+**GET /api/getUser: Retorna os dados de um usuário específico com base no ID.**
+
+**POST /api/registerUser: Adiciona um novo usuário ao users.json.**
+
+**PUT /api/updateUser: Atualiza os dados de um usuário específico.**
+
+**DELETE /api/deleteUser: Remove um usuário específico.**
+
+## Componentes Reutilizáveis
+Na pasta src/components/, possuí os componentes Button, Input, e Label, que podem ser reutilizados em toda a aplicação.
+
+## Estilo
+O projeto utiliza Tailwind CSS para estilização. As configurações estão no arquivo tailwind.config.ts.
+
+
+
