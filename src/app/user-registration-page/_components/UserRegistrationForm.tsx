@@ -14,7 +14,7 @@ interface FormData {
   CPF: string
   RG: string
   Profession: string
-  Image: string
+  Image: File | null
 }
 
 export default function UserRegistrationForm() {
@@ -25,16 +25,43 @@ export default function UserRegistrationForm() {
     CPF: '',
     RG: '',
     Profession: '',
-    Image: '',
+    Image: null,
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
+    const { name, value, type, files } = e.target
+
+    if (type === 'file' && files) {
+      setFormData((prevData) => ({ ...prevData, [name]: files[0] }))
+    } else {
+      setFormData((prevData) => ({ ...prevData, [name]: value }))
+    }
   }
 
-  const handleRegister = () => {
-    console.log('Usuário registrado:', formData)
+  const handleRegister = async () => {
+    const formDataToSend = {
+      ...formData,
+      Image: formData.Image ? formData.Image.name : null, // Armazena apenas o nome do arquivo para simplificar
+    }
+
+    try {
+      const response = await fetch('/api/registerUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataToSend),
+      })
+
+      if (response.ok) {
+        console.log('Usuário registrado com sucesso!')
+        // Limpa o formulário ou faz qualquer ação adicional
+      } else {
+        console.error('Falha ao registrar usuário')
+      }
+    } catch (error) {
+      console.error('Erro:', error)
+    }
   }
 
   return (
@@ -44,7 +71,7 @@ export default function UserRegistrationForm() {
           e.preventDefault()
           handleRegister()
         }}
-        className="bg-primary flex w-full max-w-md flex-col gap-2 rounded-md p-8 py-10 shadow-2xl shadow-black"
+        className="my-10 flex w-full max-w-md flex-col gap-2 rounded-md bg-primary p-8 py-10 shadow-2xl shadow-black"
       >
         <h1 className="mb-6 text-center text-3xl font-bold">
           User Registration
@@ -54,22 +81,33 @@ export default function UserRegistrationForm() {
             <Label htmlFor={field}>
               {field.charAt(0).toUpperCase() + field.slice(1) + ':'}
             </Label>
-            <Input
-              id={field}
-              name={field}
-              type="text"
-              placeholder={`Enter ${field}`}
-              value={formData[field as keyof FormData]}
-              onChange={handleChange}
-            />
+            {field === 'Image' ? (
+              <input
+                id={field}
+                name={field}
+                type="file"
+                accept="image/*"
+                onChange={handleChange}
+                className="mt-1 block w-full rounded border border-gray-600 bg-[#444444] text-sm text-white placeholder-white file:m-3 file:ml-5 file:mr-1 file:rounded file:border-0"
+              />
+            ) : (
+              <Input
+                id={field}
+                name={field}
+                type="text"
+                placeholder={`Enter ${field}`}
+                value={formData[field as keyof FormData] as string}
+                onChange={handleChange}
+              />
+            )}
           </div>
         ))}
         <Button type="submit" className="w-full">
           Register
         </Button>
         <Link
-          href="/user-registration-form"
-          className="text-secondary-100 text-center text-sm"
+          href="/user-login"
+          className="text-center text-sm text-secondary-100"
         >
           Already have an account? Log In
         </Link>
