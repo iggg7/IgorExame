@@ -15,6 +15,7 @@ const config: Config = {
         secondary: {
           default: '#444444',
           100: '#969595',
+          200: '#3c3c3c',
         },
         blue: {
           300: '#007bff',
