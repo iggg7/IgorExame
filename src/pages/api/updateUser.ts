@@ -1,5 +1,3 @@
-// pages/api/updateUser.ts
-
 import fs from 'fs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
