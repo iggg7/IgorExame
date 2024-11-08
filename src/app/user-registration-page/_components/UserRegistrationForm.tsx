@@ -4,7 +4,7 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface FormData {
@@ -27,6 +27,7 @@ export default function UserRegistrationForm() {
     Profession: '',
     Image: null,
   })
+  const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, files } = e.target
@@ -41,7 +42,7 @@ export default function UserRegistrationForm() {
   const handleRegister = async () => {
     const formDataToSend = {
       ...formData,
-      Image: formData.Image ? formData.Image.name : null, // Armazena apenas o nome do arquivo para simplificar
+      Image: formData.Image ? formData.Image.name : null,
     }
 
     try {
@@ -55,7 +56,7 @@ export default function UserRegistrationForm() {
 
       if (response.ok) {
         console.log('Usuário registrado com sucesso!')
-        // Limpa o formulário ou faz qualquer ação adicional
+        router.push('/')
       } else {
         console.error('Falha ao registrar usuário')
       }
@@ -105,10 +106,7 @@ export default function UserRegistrationForm() {
         <Button type="submit" className="w-full">
           Register
         </Button>
-        <Link
-          href="/user-login"
-          className="text-center text-sm text-secondary-100"
-        >
+        <Link href="/" className="text-center text-sm text-secondary-100">
           Already have an account? Log In
         </Link>
       </form>

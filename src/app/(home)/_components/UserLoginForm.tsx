@@ -4,14 +4,18 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function UserLoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const router = useRouter()
+
   const handleLogin = () => {
     console.log('Login realizado com:', { username, password })
+    router.push('/user-management-table')
   }
 
   return (
