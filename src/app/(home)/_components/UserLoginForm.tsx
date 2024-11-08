@@ -4,14 +4,18 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function UserLoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const router = useRouter()
+
   const handleLogin = () => {
     console.log('Login realizado com:', { username, password })
+    router.push('/user-management-table')
   }
 
   return (
@@ -21,7 +25,7 @@ export default function UserLoginForm() {
           e.preventDefault()
           handleLogin()
         }}
-        className="bg-primary flex w-full max-w-sm flex-col gap-1 rounded-md p-8 py-10 shadow-2xl shadow-black"
+        className="flex w-full max-w-sm flex-col gap-1 rounded-md bg-primary p-8 py-10 shadow-2xl shadow-black"
       >
         <h1 className="my-5 text-center text-3xl font-bold">User Login</h1>
         <div>
@@ -46,8 +50,8 @@ export default function UserLoginForm() {
         </div>
         <Button type="submit">Login</Button>
         <Link
-          href="/user-registration-form"
-          className="text-secondary-100 text-center text-sm"
+          href="/user-registration-page"
+          className="text-center text-sm text-secondary-100"
         >
           Don&apos;t have an account? Sign up
         </Link>
