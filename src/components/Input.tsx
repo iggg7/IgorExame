@@ -11,7 +11,7 @@ export default function Input({ id, ...props }: InputProps) {
       <input
         id={id}
         {...props}
-        className="bg-secondary-default placeholder-secondary-100 h-11 w-full rounded border px-6 text-sm text-white focus:outline-none"
+        className="h-11 w-full rounded border bg-secondary-default px-6 text-sm text-white placeholder-secondary-100 focus:outline-none"
         style={{
           borderColor: '#555555',
         }}
