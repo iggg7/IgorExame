@@ -1,104 +1,127 @@
-# Exame Responsive Web Development
 
-Este projeto é uma aplicação de gerenciamento de usuários construída com Next.js e TypeScript. O objetivo é permitir o registro, edição e visualização de usuários, com funcionalidades para manipulação de dados e uma interface de usuário utilizando Tailwind CSS.
+# Exame Igor - Projeto de Desenvolvimento Web Responsivo
 
-## Estrutura do Projeto
+Este é o repositório do projeto desenvolvido para o exame de Desenvolvimento Web Responsivo. O objetivo principal deste projeto é a criação de uma aplicação de gerenciamento de usuários, utilizando Next.js 14.2.13 com TypeScript e Tailwind CSS.
 
-A estrutura principal do projeto é organizada da seguinte forma:
 
-```bash
-📁igorexame
-├── 📁public
-│   └── favicon.ico                 # Ícone do site
-├── 📁src
-│   ├── 📁app                       # Páginas da aplicação 
-│   ├── 📁components                
-│   ├── 📁data                      
-│   │   └── users.json              
-│   └── 📁pages/api                 # Endpoints da API para manipulação de usuários
-├── .eslintrc.json                  # Configurações do ESLint
-├── .gitignore                      # Arquivo para ignorar arquivos no Git
-├── .prettierrc                     # Configurações do Prettier para formatação de código
-├── next-env.d.ts                   # Definições de tipos para o Next.js
-├── next.config.mjs                 # Configurações específicas do Next.js
-├── package.json                    # Dependências e scripts do projeto
-├── postcss.config.mjs              # Configurações do PostCSS
-├── tailwind.config.ts              # Configurações do Tailwind CSS
-└── tsconfig.json                   # Configurações do TypeScript
+
+
+## Estrutura
+
+```
+└── 📁igorexame
+    └── 📁data
+        └── users.json           # Arquivo de dados dos usuários
+    └── 📁public
+        └── favicon.ico          # Ícone da aplicação
+    └── 📁src
+        └── 📁app
+            └── 📁(home)            
+                └── 📁_components
+                    └── UserLoginForm.tsx   # Formulário de login de usuário
+                └── page.tsx                # Página inicial (Login)
+            └── 📁user-management
+                └── 📁[id]                 # Página para edição de um usuário específico
+                └── page.tsx               # Página de gerenciamento de usuários
+            └── 📁user-registration-page
+                └── 📁_components
+                    └── UserRegistrationForm.tsx   # Formulário de cadastro de usuário
+                └── page.tsx                      # Página de cadastro de usuários
+            └── globals.css                   # Estilos globais
+            └── layout.tsx                    # Layout da aplicação
+        └── 📁components
+            └── Button.tsx                     # Componente de botão
+            └── Input.tsx                      # Componente de input
+            └── Label.tsx                      # Componente de label
+        └── 📁pages
+            └── 📁api
+                └── deleteUser.ts              # API para deletar usuário
+                └── getUser.ts                 # API para pegar um único usuário
+                └── getUsers.ts                # API para pegar todos os usuários
+                └── registerUser.ts           # API para registrar um novo usuário
+                └── updateUser.ts             # API para atualizar usuário
+    └── .eslintrc.json                        # Configurações do ESLint
+    └── .gitignore                            # Ignora node_modules e arquivos desnecessários
+    └── .prettierrc                           # Configurações do Prettier
+    └── next-env.d.ts                         # Tipos do Next.js
+    └── next.config.mjs                       # Configuração do Next.js
+    └── package-lock.json                     # Lock de dependências
+    └── package.json                          # Dependências e scripts
+    └── postcss.config.mjs                    # Configuração do PostCSS
+    └── README.md                             # Documentação do projeto
+    └── tailwind.config.ts                    # Configuração do Tailwind CSS
+    └── tsconfig.json                         # Configuração do TypeScript
+
 ```
 
-## Pré-requisitos
 
-Certifique-se de ter o seguinte instalado em sua máquina:
 
-- Node.js (versão 14 ou superior)
-- npm (ou yarn, conforme preferir)
+## Configuração e Versão do Next.js
 
+Este projeto utiliza Next.js versão 14.2.13, como especificado. A configuração inicial foi feita com o comando:
+
+```bash
+  npx create-next-app@14.2.13
+```
+    
 ## Instalação
 
-1. Clone o repositório:
+Clone o repositório:
 
-```bash
+```
 git clone https://github.com/iggg7/IgorExame.git
-cd igorexame
 ```
-   
-2. Instale as dependências:
 
-```bash
+Instale as dependências:
+
+```
 npm install
-```
-
-ou, se estiver usando yarn:
-```bash
+# ou, caso use yarn:
 yarn install
+
 ```
 
-Inicie o servidor de desenvolvimento:
-```bash
+Rodar o projeto localmente:
+
+```
 npm run dev
-```
-
-ou
-
-```bash
+# ou
 yarn dev
 ```
 
-#### Acesse a aplicação em http://localhost:3000.
 
-## Funcionalidades
+## Rotas e Consumo de API
+Rotas
+O projeto implementa rotas estáticas e dinâmicas conforme a necessidade. A estrutura de rotas está organizada no diretório src/app, onde as páginas e componentes são definidos:
 
-1. Login de Usuário
-A página de login está localizada em src/app/(home)/page.tsx. O formulário permite que os usuários façam login com um nome de usuário e senha para acessar a tabela de usuários (não possuí validador apenas retorna no console quem fez o login). *(na url: "http://localhost:3000/")*
+- Página Inicial (/): Formulário de Login de Usuário.
+- Página de Cadastro (/user-registration-page): Formulário para registro de novos usuários.
+- Página de Gerenciamento de Usuários (/user-management-table): Exibe todos os usuários com opções para editar e excluir.
+- Página de Edição de Usuário (/user-management/[id]): Permite editar um usuário específico. (rota dinâmica)
 
-2. Registro de Usuário
-A página de registro está localizada em src/app/user-registration-page/page.tsx. Nessa página, você pode preencher os detalhes do usuário e enviá-los para o armazenamento no arquivo users.json.*(na url: "(http://localhost:3000/user-registration-page)")*
 
-3. Tabela de Gerenciamento de Usuários
-A página de gerenciamento de usuários está localizada em src/app/user-management-table/page.tsx. Ela exibe uma tabela com os dados dos usuários registrados e oferece ações de edição e exclusão. *(na url: "http://localhost:3000/user-management-table")*
 
-4. Edição de Usuário
-A página de edição de usuários é uma rota dinâmica localizada em src/app/user-management/[id]/page.tsx. Acessível a partir da tabela de usuários, permite editar as informações do usuário selecionado. *(na url: "http://localhost:3000/user-management/[id]")*
+## Consumo de API
 
-## API Endpoints
-Os endpoints da API estão na pasta src/pages/api/ nesses end-poits foi aplicado o RouterHandler. Eles incluem:
+O projeto consome uma API local baseada em um arquivo JSON chamado users.json, que armazena os dados dos usuários. Nessas rotas são utilizados os ROuter Handlers, As principais operações de API são:
 
-**GET /api/getUsers: Retorna a lista completa de usuários.**
+- **GET /api/getUsers:** Obtém a lista de todos os usuários.
+- **GET /api/getUser?id={id}:** Obtém os dados de um usuário específico.
+- **POST /api/registerUser:** Registra um novo usuário.
+- **PUT /api/updateUser:** Atualiza os dados de um usuário.
+- **DELETE /api/deleteUser:** Deleta um usuário.
 
-**GET /api/getUser: Retorna os dados de um usuário específico com base no ID.**
+## Tecnologias utilizadas
 
-**POST /api/registerUser: Adiciona um novo usuário ao users.json.**
-
-**PUT /api/updateUser: Atualiza os dados de um usuário específico.**
-
-**DELETE /api/deleteUser: Remove um usuário específico.**
+- Next.js 14.2.13: Framework React para construção de aplicações fullstack.
+- TypeScript: Superset do JavaScript que adiciona tipagem estática.
+- Tailwind CSS: Framework CSS utilitário para estilização rápida e personalizada.
+- Lucide Icons: Biblioteca de ícones utilizados no projeto.
 
 ## Componentes Reutilizáveis
-Na pasta src/components/, possuí os componentes Button, Input, e Label, que podem ser reutilizados em toda a aplicação.
+Na pasta src/components/, possuí os componentes Button, Input, e Label, que podem ser reutilizados em toda a aplicação, deixando os códigos dos formulários mais limpos.
 
-## Estilo
-O projeto utiliza Tailwind CSS para estilização. As configurações estão no arquivo tailwind.config.ts.
+### DESENVOLVIDO POR:
 
-
+Igor Ribeiro Bezerra - rm550989
 
