@@ -118,6 +118,8 @@ O projeto consome uma API local baseada em um arquivo JSON chamado users.json, q
 - Tailwind CSS: Framework CSS utilitário para estilização rápida e personalizada.
 - Lucide Icons: Biblioteca de ícones utilizados no projeto.
 
+## Componentes Reutilizáveis
+Na pasta src/components/, possuí os componentes Button, Input, e Label, que podem ser reutilizados em toda a aplicação, deixando os códigos dos formulários mais limpos.
 
 ### DESENVOLVIDO POR:
 
