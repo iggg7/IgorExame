@@ -103,7 +103,7 @@ O projeto implementa rotas estáticas e dinâmicas conforme a necessidade. A est
 
 ## Consumo de API
 
-O projeto consome uma API local baseada em um arquivo JSON chamado users.json, que armazena os dados dos usuários. As principais operações de API são:
+O projeto consome uma API local baseada em um arquivo JSON chamado users.json, que armazena os dados dos usuários. Nessas rotas são utilizados os ROuter Handlers, As principais operações de API são:
 
 - **GET /api/getUsers:** Obtém a lista de todos os usuários.
 - **GET /api/getUser?id={id}:** Obtém os dados de um usuário específico.
